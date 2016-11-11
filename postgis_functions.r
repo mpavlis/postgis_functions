@@ -100,9 +100,7 @@ get_field_names <- function(table_name, get_type = T, table_prefix = "", table_s
 #######################################################################################################
 #                              Intersect Road network with Polygons                                   #
 #######################################################################################################
-road_poly_intersect <- function(db_name, password, username, roads_table, polygons_table, table_out){
-  
-  con <- odbcConnect(db_name, uid = username, pwd=password)
+road_poly_intersect <- function(con, roads_table, polygons_table, table_out){
   
   ########################################### Create new table ########################################
   road_fields <- get_field_names(roads_table,con=con)
@@ -234,9 +232,7 @@ poly_poly_union <- function(con, poly1, poly2, poly_out, add_poly2_fields = T){
 ########################################################################################################
 #                            Polygons road connectivity                                                #
 ########################################################################################################
-polys_road_connectivity <- function(db_name, username, password, road_poly_table, poly_id_field, out_table){
-  
-  con <- odbcConnect(db_name, uid = username, pwd = password)
+polys_road_connectivity <- function(con, road_poly_table, poly_id_field, out_table){
   
   ############################### Create topology ######################################################
   query <- paste("ALTER TABLE ", road_poly_table, " ADD COLUMN source integer;\n",
@@ -274,9 +270,7 @@ polys_road_connectivity <- function(db_name, username, password, road_poly_table
 #                                      Sum of road length per OA                                                      #
 #                              Select only A road, Major road, Highway                                                #
 #######################################################################################################################
-road_length <- function(db_name, username, password, road_poly_table, road_class_field, polygons_field, table_out){
-  
-  con <- odbcConnect(db_name, uid = username, pwd = password)
+road_length <- function(con, road_poly_table, road_class_field, polygons_field, table_out){
   
   query <- paste("CREATE TABLE ", table_out, " AS ",
                  "SELECT DISTINCT q1.", polygons_field, " FROM ", road_poly_table, " AS q1",
