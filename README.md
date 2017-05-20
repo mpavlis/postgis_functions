@@ -1,7 +1,7 @@
 # postgis_functions
 R functions using postgis for spatial analysis
 
-The postgis_functions.r script provides a number of functions that could be useful for spatial data analysis using PostGIS through R. Requires RODBC and rgdal libraries installed in R. A database with postgis extension enabled and an odbc connection. Also in Linux it would be a good idea to create a .pgpass file https://www.postgresql.org/docs/9.4/static/libpq-pgpass.html
+The postgis_functions.r script provides a number of functions that might be useful for spatial data analysis using PostGIS in R. Requires the DBI and RPostgreSQL libraries in R and a PstgreSQL database with the postgis extension enabled. Also in Linux it would be a good idea to create a .pgpass file https://www.postgresql.org/docs/9.4/static/libpq-pgpass.html
 
 1. The function get_shp\_names lists the shapefile names in a directory that match a pattern. It can be used as input for the input_or_append function. Two arguments:
 
