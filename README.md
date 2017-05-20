@@ -17,7 +17,7 @@ The postgis_functions.r script provides a number of functions that might be usef
   
   - The names of shapefiles (the get_shp\_names function can be useful if multiple shapefiles have to be appended) (vector of strings).
   
-  - The projection (integer, e.g. 27700 for British National Grid.
+  - The projection e.g. 27700 for British National Grid (integer).
   
   - The name of the new table in Postgres (if the table exists it will be dropped) (string).
   
