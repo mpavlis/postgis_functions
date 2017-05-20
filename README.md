@@ -9,21 +9,23 @@ The postgis_functions.r script provides a number of functions that could be usef
 
   - A regular expression pattern (string).
 
-2. The function import_or\_append can be used to import a single shapefile or append multiple shapefiles in a table in Postgres. I created it initially to make it easier to upload Ordnance Survey data that are split into different grids, which makes it time consuming to be appended manually in a single table. Four arguments:
+2. The function import_or\_append can be used to import a single shapefile or append multiple shapefiles in a table in Postgres. I created it initially to make it easier to upload Ordnance Survey data that are split into different grids, which makes it time consuming to be appended manually in a single table. Five arguments:
   
-  - An odbc connection created with the odbcConnect function from the RODBC library.
+  - DBMS connection created with the dbConnect function from the DBI library.
   
-  - The directory of the shapefiles (string).
-  
-  - The name of the new table in Postgres (if the table exists it will be dropped) (string).
+  - The directory or directories of the shapefiles (string).
   
   - The names of shapefiles (the get_shp\_names function can be useful if multiple shapefiles have to be appended) (vector of strings).
+  
+  - The projection (integer, e.g. 27700 for British National Grid.
+  
+  - The name of the new table in Postgres (if the table exists it will be dropped) (string).
   
 3. The function get_field\_names is used internally to obtain the schema of the tables.
 
 4. The function road_poly\_intersect can be used to intersect a road network with polygons (geographical boundaries). Input is a line or multiline geometry and polygon or multipolygon geometry, outputs a line geometry with the fields from both input tables as well as two fields with the area and perimeter of the polygons. Four arguments:
 
-  - An odbc connection created with the odbcConnect function from the RODBC library.
+  - DBMS connection created with the dbConnect function from the DBI library.
   
   - The name of the road network table (string).
   
@@ -33,7 +35,7 @@ The postgis_functions.r script provides a number of functions that could be usef
   
 5. The function poly_poly\_intersect can be used to intersect two tables with polygon or multipolygon geometries. Returns a table with multipolygon geometry representing the intersection of the two geometries and fields either from the left or both tables. Five arguments:
 
-  - An odbc connection created with the odbcConnect function from the RODBC library.
+  - DBMS connection created with the dbConnect function from the DBI library.
   
   - The name of the first table (string).
   
@@ -45,7 +47,7 @@ The postgis_functions.r script provides a number of functions that could be usef
   
 6. The function poly_poly\_union can be used to union two tables with polygon or multipolygon geometries. Returns a table with multipolygon geometry representing the union of the two geometries and fields either from the left or both tables. Five arguments:
 
-  - An odbc connection created with the odbcConnect function from the RODBC library.
+  - DBMS connection created with the dbConnect function from the DBI library.
   
   - The name of the first table (string).
   
